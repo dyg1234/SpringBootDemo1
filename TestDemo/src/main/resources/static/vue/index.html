@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>vueDemo</title>
+</head>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body>
+
+<div id="app">
+        姓名: <input name="name" v-model="name" /><br/>
+        密码: <input name="pw" v-model="pw" /><br/>
+        权限: <input name="permission" v-model="permission" /><br/>
+         <input type="button" value="查询" @click="sub"/>
+</div>
+
+
+<script src="../js/vue-2.6.10.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            name:'空',
+            pw:'空',
+            permission:'空'
+        },
+        methods:{
+          sub:function () {
+              //发送get请求
+              var _this=this;
+              axios.get('/vue/hello').then(function (res) {
+                  _this.name=res.data.name;
+                  _this.pw=res.data.pw;
+                  _this.permission=res.data.permission;
+              }, function (res) {
+                  alert("fail");
+              });
+          }
+        }
+    });
+</script>
+
+</body>
+</html>

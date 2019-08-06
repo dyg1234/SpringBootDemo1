@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>code</title>
+</head>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body>
+
+<div id="app">
+    <button @click="sub" >点击获取验证码图片和凭证</button>
+    大图: <img v-bind:src="bigt" />
+    小图: <img v-bind:src="smt" />
+    token: <span>{{token}}</span>
+
+
+</div>
+
+
+<script src="../js/vue-2.6.10.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            bigt:'空',
+            smt:'空',
+            token:'空'
+        },
+        methods:{
+            sub:function () {
+                //发送get请求
+                var _this=this;
+                axios.get('/getcode').then(function (res) {
+                    _this.bigt=res.data.verifyBigImage;
+                    _this.smt=res.data.verifySmallImage;
+                    _this.token=res.data.ticket;
+                }, function (res) {
+                    alert("fail");
+                });
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

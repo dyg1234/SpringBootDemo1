@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>code</title>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="js/sliding-verify.css">
+<style>
+    .input-box{
+        width: 340px;
+        height: 191px;
+    }
+</style>
+<div >
+
+
+    <div class="input-box">
+<img id="big" src="">
+<img id="sm" src="">
+<div id="t"></div>
+<div id="t1"></div>
+<div id="t2"></div>
+    </div>
+    <div id="slideVpanel"></div>
+
+
+</div>
+
+
+<script src="js/jquery-1.10.min.js"></script>
+<!--<script src="js/sliding-verify.js"></script>-->
+
+<script>
+    //获得服务器验证信息
+    function getCheckInfo() {
+        $.ajax({
+            url: "getcode", //请求的url地址
+            dataType: "json", //服务器返回的值类型
+            data: {
+            }, //发送到服务器的参数
+            type: "POST", //请求方式
+            success: function(res) {
+                //请求成功时处理
+                alert(JSON.stringify(res));
+                $("#big").attr("src",res.verifyBigImage);
+                $("#sm").attr("src",res.verifySmallImage);
+                $("#t").text(res.ticket);
+                $("#t1").text(res.verifyBigImage);
+                $("#t2").text(res.verifySmallImage);
+            },
+            error: function(data) {
+                //请求出错处理
+                alert("出错了");
+            }
+        });
+    }
+    getCheckInfo();
+</script>
+
+</body>
+</html>

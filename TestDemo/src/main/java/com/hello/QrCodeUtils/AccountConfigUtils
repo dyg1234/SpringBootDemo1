@@ -1,0 +1,302 @@
+/*
+package com.hello.QrCodeUtils;
+
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.innochina.platform.common.utils.DateUtils;
+import com.innochina.platform.common.utils.ReplaceCharUtils;
+
+import jodd.props.Props;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+*/
+/**
+ * 用户账号配置类
+ * 
+ * @author wwenbo@linewell.com  
+ * @since 2019年3月5日
+ *//*
+
+public class AccountConfigUtils {
+
+	*/
+/**
+	 *  文件路径
+	 *//*
+
+	public static final String FILE_NAME = "config/account/account.properties";
+	
+    */
+/**
+     * 底图文件名
+     *//*
+
+	
+	private static final String IMAGE_BORDER_FILE_NAME = "config/templates/imageverify/verifyBorder{1}.png";
+    
+	*/
+/**
+	 * 模板文件名
+	 *//*
+
+    private static final String IMAGE_CUTTING_TEMPLATE_FILE_NAME = "config/templates/imageverify/{1}.png";
+
+    */
+/**
+     * 模板图片数量
+     *//*
+
+    private static final int VALIDATE_IMAGE_TEMPLATE_SIZE = 4;
+    
+    */
+/**
+     * 底图图片数量
+     *//*
+
+    private static final int VALIDATE_IMAGE_VERIFY_BORDER_SIZE = 1;
+    
+	*/
+/**
+	 *  获取单实例对
+	 *//*
+
+	private static AccountConfigUtils instance = new AccountConfigUtils();
+	
+	*/
+/**
+	 *  配置文件的配置
+	 *//*
+
+	private Props configProps;
+	
+	*/
+/**
+	 * 配置文件路径
+	 *//*
+
+	private String configPath;
+	
+	*/
+/**
+	 * base64Image底图
+	 *//*
+
+	private List<String> base64VerifyBorderImageList = new ArrayList<String>();
+
+	*/
+/**
+	 * base64Image验证移动方格模板图 
+	 *//*
+
+	private List<String> base64VerifyCuttingTemplateImageList = new ArrayList<String>();
+	
+	*/
+/**
+	 * 私有构
+	 *//*
+
+	private AccountConfigUtils() {
+		this.init();
+	}
+	
+	*/
+/**
+	 * 初始化配置
+	 *//*
+
+	private void init() {
+		
+		if (configProps == null) {
+			configProps = new Props();
+		}
+		URL url = null;
+		String path = null;
+		try {
+
+			path = System.getProperty("user.dir") + File.separator + FILE_NAME;
+			File file = new File(path);
+			if (!file.exists()) {
+				url = AccountConfigUtils.class.getClassLoader().getResource(FILE_NAME);
+				path = url.getPath();
+				file = new File(path);
+				configPath = path.substring(0, path.indexOf(FILE_NAME));
+			}else {
+				configPath = System.getProperty("user.dir") + File.separator;
+			}
+			this.configProps.load(new FileInputStream(file), "utf-8");
+			
+			
+		} catch(Exception e) {
+			configPath = "";
+			System.out.println(FILE_NAME+" 文件不存在");
+			e.printStackTrace();
+			return;
+		}
+	}
+
+	*/
+/**
+	 * @return 单实例对象
+	 *//*
+
+	public static AccountConfigUtils getInstance() {
+		return instance;
+	}
+	
+			
+	*/
+/**
+	 * 获取验证码底图路径
+	 * 
+	 * @return
+	 *//*
+
+	public String getVerifyBorderImagePath() {
+		
+		if (StringUtils.isNotEmpty(configPath)) {
+			return configPath + IMAGE_BORDER_FILE_NAME;
+		}else {
+			return "";
+		}
+	}
+	
+	*/
+/**
+	 * 获取验证码移动方格模板路径
+	 * 
+	 * @return
+	 *//*
+
+	public String getVerifyCuttingTemplateImagePath() {
+		
+		if (StringUtils.isNotEmpty(configPath)) {
+			return configPath + IMAGE_CUTTING_TEMPLATE_FILE_NAME;
+		}else {
+			return "";
+		}
+	}
+	
+	public BufferedImage getVerfiyBorderImage() throws Exception {
+		
+		if (!base64VerifyBorderImageList.isEmpty()) {
+			
+			Random random = new Random();
+			int index = random.nextInt(base64VerifyBorderImageList.size());
+			String base64Str = base64VerifyBorderImageList.get(index);
+			return base64StringToImage(base64Str);
+		}
+		
+		for (int i = 1; i < VALIDATE_IMAGE_VERIFY_BORDER_SIZE + 1; i++) {
+			
+			String fileName = ReplaceCharUtils.replaceChar(getVerifyBorderImagePath(), i + "");
+			if (StringUtils.isNotEmpty(fileName)) {
+				
+				FileInputStream fis;
+				try {
+					fis = new FileInputStream(fileName);
+					BufferedImage cuttingImageBi = ImageIO.read(fis);
+					fis.close();
+					if (cuttingImageBi != null) {
+						base64VerifyBorderImageList.add(imageToBase64(cuttingImageBi));
+					}			
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (!base64VerifyBorderImageList.isEmpty()) {
+			
+			Random random = new Random();
+			String base64Str = base64VerifyBorderImageList.get(random.nextInt(
+					base64VerifyBorderImageList.size()));
+			return base64StringToImage(base64Str);
+		}
+		
+		return null;
+	}
+	
+	public BufferedImage getVerifyCuttingTemplateImage() throws Exception {
+		
+		if (!base64VerifyCuttingTemplateImageList.isEmpty()) {
+			
+			Random random = new Random();
+			int index = random.nextInt(base64VerifyCuttingTemplateImageList.size());
+			String base64Str = base64VerifyCuttingTemplateImageList.get(index);
+			return base64StringToImage(base64Str);
+		}
+		
+		for (int i = 1; i < VALIDATE_IMAGE_TEMPLATE_SIZE + 1; i++) {
+			
+			String fileName = ReplaceCharUtils.replaceChar(getVerifyCuttingTemplateImagePath(), i + "");
+			if (StringUtils.isNotEmpty(fileName)) {
+				
+//				System.out.println("start getVerifyCuttingTemplateImage:" + DateUtils.parseTimeToDateMinuteStr(System.currentTimeMillis()));
+				FileInputStream fis;
+				try {
+					fis = new FileInputStream(fileName);
+					BufferedImage cuttingImageBi = ImageIO.read(fis);
+					fis.close();
+					if (cuttingImageBi != null) {
+						base64VerifyCuttingTemplateImageList.add(imageToBase64(cuttingImageBi));
+					}			
+//					System.out.println("over getVerifyCuttingTemplateImage:" + DateUtils.parseTimeToDateMinuteStr(System.currentTimeMillis()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (!base64VerifyCuttingTemplateImageList.isEmpty()) {
+			
+			Random random = new Random();
+			String base64Str = base64VerifyCuttingTemplateImageList.get(random.nextInt(
+					base64VerifyCuttingTemplateImageList.size()));
+			return base64StringToImage(base64Str);
+		}
+		
+		return null;
+	}
+	
+    public static String imageToBase64(BufferedImage image) throws  Exception{
+    	
+        byte[] imagedata = null;
+        ByteArrayOutputStream bao=new ByteArrayOutputStream();
+        ImageIO.write(image,"png",bao);
+        imagedata=bao.toByteArray();
+        BASE64Encoder encoder = new BASE64Encoder();
+        String BASE64IMAGE=encoder.encodeBuffer(imagedata).trim();
+        BASE64IMAGE = BASE64IMAGE.replaceAll("\n", "").replaceAll("\r", "");//删除 \r\n
+        return BASE64IMAGE;
+    }
+    
+    public static BufferedImage base64StringToImage(String base64String) {
+    	
+        try {
+            BASE64Decoder decoder=new BASE64Decoder();
+            byte[] bytes1 = decoder.decodeBuffer(base64String);
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytes1);
+            return ImageIO.read(bais);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+}
+*/

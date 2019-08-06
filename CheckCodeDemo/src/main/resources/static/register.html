@@ -1,0 +1,79 @@
+<html>
+	<head>
+       <title>注册</title>
+	</head>
+
+    <body>
+    	<div class="main-content">
+			<div class="login-banner">
+				<div class="layout">
+					<div class="tit-box">
+						<h2>人工智能</h2>
+						<h3>多媒体信息识别技术竞赛</h3>
+					</div>
+					<div class="user-input-box register-box">
+						<div class="tit">用户注册</div>
+						<form id="registerForm" method="post" onsubmit="return false;">
+							<div class="content">
+								<div class="input-box">
+									<input id="userphone" name="userphone" placeholder="中国大陆手机号/邮箱账号"
+			   						data-errormessage-value-missing="请输入中国大陆手机号/邮箱账号" data-errormessage-custom-error="中国大陆手机号/邮箱账号格式错误"
+			   						class="input validate[required,custom[emailOrPhone]]" type="text" value=""/>
+								</div>
+								<div class="input-box">
+									<div id="slideVpanel"></div>
+								</div>
+								<div class="tips-success hide" id="slideSuccess"><i class="icon-pre icon-success"></i>验证成功！</div>
+								<div class="input-box check">
+									<input type="text" id="verifyCode" maxlength="6" name="verifyCode" placeholder="验证码" 
+									data-errormessage-value-missing="请输入验证码" class="input validate[required]"/>
+									<a class="btn js-send-btn" id="senCodeBtn">获取验证码</a>
+								</div>
+								<!--<div class="input-box">
+									<input id="nickName" name="nickName" placeholder="昵称"
+			   						data-errormessage-value-missing="请输入昵称" data-errormessage-custom-error="请输入1-15位昵称" class="input validate[required,custom[checkName]]" type="text" value=""/>
+								</div>-->
+								<div class="input-box">
+									<input id="password" name="password" maxlength="20" placeholder="密码"
+			   						data-errormessage-value-missing="请输入8-20位，包含大小写字母和数字的密码" autocomplete="new-password" data-errormessage-custom-error="请输入8-20位，包含大小写字母和数字的密码" class="input validate[required,custom[checkPasswordHightLevel]]" type="password" value=""/>
+									<i class="icon-pre icon-eye-close" id="eyeBtn"></i>
+								</div>
+								
+							</div>
+							<a class="button" href="javascript:void(0);" id="registerBtn">注册</a>
+							<div class="bottom">
+								<!--<div class="check-box">
+									<span>
+										<input type="checkbox" id="agreeSignup" name="choose">
+										<label for="agreeSignup">我已阅读并同意</label>
+										<a class="link left" href="<%defaultParams.BASE_URL%>/detail/protocol-detail.html?id=1d7f85d192204179a612a7d7348b2abb" target="_blank">《用户注册服务协议》</a>
+									</span>
+								</div>-->
+								<a class="right" href="/login/login.html">登录</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="proBox" class="mask">
+			<div class="msg-box protocol">
+				<div class="box-header"><%data.title%></div>
+                <div class="content-text">
+					<p><%#data.content%></p>
+                </div>
+                <div class="check-box">
+					<input type="checkbox" id="agreeSignup" name="choose">
+					<label for="agreeSignup">我已阅读并同意此协议</label>
+                </div>
+                <div class="buttons">
+                    <a id="downDesc" class="button primary disabled">（15s）继续</a>
+                </div>
+            </div>
+		</div>
+
+        <script type="text/javascript">
+        	seajs.use("ai/js/pages/login/register");
+        </script>
+	</body>
+</html>

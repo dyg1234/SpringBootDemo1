@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户添加</title>
+</head>
+<body>
+<h1>添加页面</h1>
+
+<h4 th:text="${msg}"></h4>
+<form action="/add" method="post">
+    用户名： <input name="name"/><br/>
+    密码： <input name="pw"/><br/>
+    <input type="submit" value="提交"/>
+</form>
+<a href="/hello"><h4>Hello!</h4></a>
+
+</body>
+</html>

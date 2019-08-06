@@ -1,0 +1,93 @@
+.ixm_tcc_bg { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 999; background: url(19ixm_qtms_bar_bg.png) repeat; text-align: center }
+.ixm_dl_tcc { position: fixed; left: 50%; top: 50%; margin-left: -230px; z-index: 1000; width: 460px; margin-top: -269px; display: none; min-height:538px; }
+.ixm_dl_tcc .close{ width:30px; height:30px; background:url(19ixm_dl_close.png) no-repeat; margin:30px auto 0; display:block; z-index:10001; cursor:pointer}
+/*.ixm_dl_con, .ixm_ewm_con { position: absolute; z-index: 4; padding: 40px; background: url(19ixm_dl_con.png) repeat; width: 380px; right: 0; top: 50%; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,.1) }
+.ixm_dl_con { min-height: 458px; margin-top: -244px; padding-bottom:20px;}
+.ixm_ewm_con { min-height: 318px; margin-top: -176px; display: none }*/
+.ixm_dl_con, .ixm_ewm_con { padding: 40px; background: url(19ixm_dl_con.png) repeat; width: 380px; border-radius: 5px; box-shadow: 0 0 20px rgba(0,0,0,.1) }
+.ixm_dl_con { padding-bottom:20px;}
+.ixm_ewm_con { display: none }
+.ixm_dl_tu { position: absolute; right: 10px; top: 10px; background: url(19ixm_dl_ewm.png) no-repeat center top; z-index: 4; width: 64px; height: 64px; cursor: pointer }
+.ixm_dl_tit { height: 52px; line-height: 52px; margin-bottom: 25px; padding: 0 30px }
+.ixm_dl_tit li { float: left; width: 50%; text-align: center; font-size: 24px; color: #333333; cursor: pointer; font-weight: bold }
+.ixm_dl_tit li.on { background: url(19ixm_dl_tit.png) no-repeat center bottom; color: #1073e6; font-weight: bold }
+.ixm_dl_tu1 { position: absolute; right: 10px; top: 10px; background: url(19ixm_dl_pc.png) no-repeat center top; z-index: 3; width: 64px; height: 64px; cursor: pointer }
+.ixm_ewm_tu { padding: 40px 0; text-align: center; line-height: 40px; }
+.ixm_ewm_tu img { background-color: #ffffff; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,.1); margin-bottom: 10px; max-width:40%; }
+.ixm_ewm_t1 { position: absolute; right: 67px; top: 10px; background: url(19ixm_dl_t1.png) no-repeat; width: 105px; height: 30px; z-index: 4 }
+.ixm_ewm_t2 { position: absolute; right: 67px; top: 10px; background: url(19ixm_dl_t2.png) no-repeat; width: 85px; height: 30px; z-index: 4 }
+.ixm_form_tit{ position:relative}
+.ixm_form_tit, .ixm_form_tit2 { margin: 0px auto; height: 32px; background-color: #ffffff; border: 1px solid #e0e0e0; padding: 9px 0px; border-radius: 5px; font-size: 16px; color: #4c6582 }
+.ixm_form_tit span, .ixm_form_tit2 span { float: left; width: 50px; height: 32px; line-height: 32px; text-align: center }
+.ixm_form_tit span img, .ixm_form_tit2 span img { margin-top: -2px; *margin-top:4px; }
+.ixm_form_tit input, .ixm_form_tit2 input { height: 32px; line-height: 32px; border: 0; font-size: 16px; width: 84%; background-color: transparent; }
+.ixm_form_tit1 {height:50px; margin:20px auto 0;}
+.ixm_form_tit1 img{ max-width:100%}
+.ixm_form_tit2 { width: 57%; float: left }
+.ixm_form_tit2 .inp1 { width: 100%; }
+.ixm_form_tit2 .inp2 { width: 75% }
+.ixm_form_tit .inp101 { width: 54% }
+.ixm_form_r { float: right; width: 41% }
+.ixm_form_tit input.btn1, .ixm_form_tit2 input.btn1 { background-color: transparent; float: right; width: auto; color: #333333; padding-right: 18px; }
+.ixm_form_tit3 { padding: 10px 0; line-height: 30px; }
+.ixm_form_tit3>a { color: #1188ff }
+.ixm_form_tit3 span { float: right; }
+.ixm_form_tit3 span a{ margin:0 4px;}
+.ixm_dl_btn { background: url(19ixm_dl_btn.jpg) repeat-y center; height: 50px; line-height: 50px; text-align: center; color: #ffffff; font-size: 18px; width: 100%; border: 0; margin:0px auto; border-radius: 5px; }
+.ixm_form_tit4 { text-align: center; margin: 10px auto 0; line-height: 31px; font-size: 16px; }
+.ixm_form_tit4 img { margin-right: 13px; }
+.ixm_form_tit5 { position: relative; height: 35px; line-height: 35px; text-align: center; color: #b1b1b1; margin:10px auto 0; }
+.ixm_form_tit5 .line_l { width: 33.3%; height: 1px; position: absolute; left: 0; top: 17px; background-color: #e4e4e4 }
+.ixm_form_tit5 .line_r { width: 33.3%; height: 1px; position: absolute; right: 0; top: 17px; background-color: #e4e4e4 }
+.ixm_ewm_tit { line-height: 40px; font-size: 18px; }
+.dl_icon1{ background:url(19ixm_dl_icon1.png) no-repeat center;}
+.dl_icon2{ background:url(19ixm_dl_icon2.png) no-repeat center;}
+.dl_icon3{ background:url(19ixm_dl_icon3.png) no-repeat center;}
+.cwxx_tit{ padding-top:10px; display:none; color:#ff0000;}
+.mar_t20{ margin-top:20px;}
+.ixm_dlts_xx{ margin:6px auto -58px; clear:both; z-index:99; padding:8px 8px 8px 40px; line-height:34px; background:url(trt_zc_icon3.png) no-repeat 12px 16px #f7f7f7; border:1px solid #e6e6e6; position:relative; color:#ff0000; display:none; font-size:14px; border-radius:5px;}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill { background-color:#ffffff}
+@media screen and (max-height:767px) and (min-width:1000px){
+	.ixm_dl_tcc{ margin-top: -209px;}
+	.ixm_dl_con, .ixm_ewm_con{ width:340px; padding:30px 20px 15px 20px;}
+	.ixm_dl_con{ min-height:380px; width:340px;}
+	.ixm_dl_tit{ margin-bottom:12px;}
+	.ixm_dl_tit li{ font-size:18px;}
+	.ixm_dl_tu,.ixm_dl_tu{ width:50px; height:50px; background-size:100% 100%}
+	.ixm_form_tit, .ixm_form_tit2{ padding:4px 0;}
+	.ixm_form_tit input, .ixm_form_tit2 input{ font-size:14px;}
+	.ixm_form_tit span, .ixm_form_tit2 span{ width:40px;}
+	.ixm_form_r img{ height:42px;}
+	.ixm_form_tit.mar_t20,.ixm_dl_con .mar_t20,.mar_t20{ margin-top:12px;}
+	.ixm_dl_btn{ height:40px; line-height:40px; margin-top:12px; font-size:15px;}
+	.ixm_form_tit3{ padding:5px 0;}
+	.ixm_form_tit4{ margin-top:0; font-size:14px;}
+	.ixm_dl_tcc{ width:380px; margin-left:-190px;}
+	.ixm_dl_tcc .close{ bottom:-20px;}
+	.ixm_form_tit1 { height:auto; margin:12px auto 0;}
+	.ixm_dlts_xx{ padding:3px 8px 3px 40px; margin:16px auto -58px; background-position: 12px 12px;}
+}
+@media screen and  (max-width:999px){
+	.ixm_dl_tcc{ margin-top:-200px; width:96%; margin-left:-48%; min-height:inherit}
+	.ixm_dl_con{ height:auto; min-height:inherit}
+	.ixm_dl_con, .ixm_ewm_con{ height:auto; margin-left:auto; margin-right:auto; width:93%; padding:10px 20px; border:1px solid #dedede; box-shadow:none}
+	.ixm_dl_tit{ padding:0; margin-bottom:15px;}
+	.ixm_ewm_con{ padding-bottom:20px;}
+	.ixm_dl_tit li{ font-size:20px;}
+	.ixm_dl_tu,.ixm_dl_tu1{ width:50px; height:50px; background-size:100% 100%}
+	.ixm_ewm_tu{ padding:20px 0;}
+	.ixm_form_tit, .ixm_form_tit2{ height:42px; padding:4px 0;}
+	.ixm_form_tit span, .ixm_form_tit2 span{ width:36px;}
+	.ixm_form_tit input, .ixm_form_tit2 input{ font-size:13px;}
+	.ixm_form_tit1 { height:auto; margin:12px auto 0;}
+	.ixm_form_tit2 .inp2{ width:72%}
+	.ixm_form_tit.mar_t20,ixm_.dl_con .mar_t20{ margin-top:15px;}
+	.ixm_dl_btn{ height:40px; line-height:40px; font-size:15px;}
+	.ixm_form_tit3{ padding:5px 0;}
+	.ixm_form_tit4{ margin-top:0; font-size:14px;}
+	.ixm_ewm_con,.ixm_dl_tu, .ixm_dl_tu1,.ixm_ewm_t1{ display:none}
+	.ixm_form_r img{ height:42px;}
+	.ixm_form_tit5 .line_l{ width:25%}
+	.ixm_dlts_xx{ margin:0px auto 0; background-color:#ffffff; padding:3px 8px 3px 40px; background-position: 12px 12px;}
+	.mar_t20{ margin-top:12px;}
+}

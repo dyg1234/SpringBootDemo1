@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户查看</title>
+</head>
+<body>
+<h1>查看页面</h1>
+<a href="/hello"><h4>Hello!</h4></a>
+<!--Map集合循环遍历
+
+<div th:each="map:${maps}" th:text="${map}"></div>
+
+数组循环遍历
+
+<tr>
+
+    <td th:each="array:${arrays}" th:text="${array}"></td>
+
+</tr>-->
+
+<!--遍历List-->
+<table >
+    <tr>
+        <th>name</th>
+        <th>password</th>
+        <th>perrmission</th>
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <th th:text="${user.name}"></th>
+        <th th:text="${user.pw}"></th>
+        <th th:text="${user.permission}"></th>
+    </tr>
+
+</table>
+
+</body>
+</html>

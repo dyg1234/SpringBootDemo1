@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>code</title>
+</head>
+
+<body>
+<style>
+    .input-box{
+        width: 340px;
+        height: 191px;
+    }
+</style>
+<div >
+
+
+    <div class="input-box">
+<img id="big" src="">
+<img id="sm" src="">
+<div id="t"></div>
+<div id="t1"></div>
+<div id="t2"></div>
+    </div>
+    <div id="slideVpanel"></div>
+
+
+</div>
+
+
+<script src="js/jquery-1.10.min.js"></script>
+
+<script>
+    //获得服务器验证信息
+    function getCheckInfo() {
+        $.ajax({
+            url: "http://127.0.0.1:9000/api/ssp/category", //请求的url地址
+            dataType: "json", //服务器返回的值类型
+            contentType:"application/json;charset=UTF-8", // 发送信息至服务器时的内容编码类型，如果不加 charset，则中文传到后台为乱码
+            data: "{\n" +
+            "    \"type\": \"1\"\n" +
+            "}",
+            type: "POST", //请求方式
+            success: function(res) {
+                //请求成功时处理
+               alert(JSON.stringify(res));
+            },
+            error: function(data) {
+                //请求出错处理
+                alert("出错了");
+            }
+        });
+    }
+    getCheckInfo();
+</script>
+
+</body>
+</html>

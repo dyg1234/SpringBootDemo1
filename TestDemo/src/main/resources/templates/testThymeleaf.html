@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>testThymeleaf</title>
+</head>
+<body>
+
+<h1>测试</h1>
+<h4 th:text="${index}"></h4>
+
+<!--没有认证或者无权限则不会显示-->
+<div >
+    用户查找：<a href="/user/find">查找</a>
+</div>
+
+<div shiro:hasPermission="user:add">
+用户添加：<a href="/user/add">添加</a>
+</div>
+
+<div th:if="${name}!=null">
+用户更新：<a th:href="@{/user/update(name=${name})}">更新</a>
+</div>
+
+<div>
+用户删除：<a href="/user/del">删除</a>
+</div>
+
+<h3>测试</h3>
+<div>
+    <a href="/jpa/findone">测试JPAfindOne</a><br/>
+    <a href="/jpa/findall">测试JPAfindAll</a>
+</div>
+
+
+
+
+</body>
+</html>

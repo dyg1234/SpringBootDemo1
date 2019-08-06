@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>code</title>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="js/sliding-verify.css">
+<style>
+   #app{
+        width: 338px;
+        height: 169px;
+    }
+</style>
+<div>
+
+
+    <h3>滑动验证码</h3>
+
+    <div id="app">
+
+    </div>
+
+
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/verify.js"></script>
+
+<script>
+/**
+ * 远程数据操作
+ */
+var remoteDataOperation={
+    /**
+     * 滑动验证码验证结果
+     * @param {Object} postData
+     * @param {Object} callback
+     */
+    getSendTips : function(postData, callback, failCallback) {
+
+        $.ajax({
+            url: "checkcode", //请求的url地址
+            data: postData,//发送到服务器的参数
+            dataType: "json", //服务器返回的值类型
+            type: "POST", //请求方式
+            success : function(row, d) {
+                callback && callback(row);
+            },
+            error : function(msg) {
+                failCallback && failCallback(msg);
+            }
+        });
+    }
+
+
+}
+
+
+/**
+ * 本地操作
+ */
+var local ={
+
+    /**
+     * 隐藏验证成功
+     */
+    hideSlideSuccess: function() {
+        $("#slideSuccess").addClass("hide");
+    },
+
+    /**
+     * 验证成功样式
+     */
+    slideSuccess:function () {
+        $("#slideSuccess").removeClass("hide");
+        $(".verify-move-block").css('background-color', '#5cb85c');
+        $('.verify-left-bar').css({'border-color': '#5cb85c', 'background-color': '#d2f4ef'});
+        $('.verify-icon').css('color', '#fff').removeClass('icon-right icon-close').addClass('icon-check');
+
+    },
+
+    /**
+     * 验证失败样式
+     */
+    slideFail:function () {
+        $(".verify-move-block").css('background-color', '#d9534f');
+        $('.verify-left-bar').css('border-color', '#d9534f');
+        $('.verify-icon').css('color', '#fff').removeClass('icon-right icon-check').addClass('icon-close');
+    },
+
+    /**
+     * 初始化滑动验证码
+     */
+    initSlideVerify : function() {
+        // 滑动验证框宽度
+        //var slideWidth = $("#app").width();
+        //var slideHeight = $("#app").height();
+
+        //初始化滑块验证码
+        $('#app').slideVerify({
+            type: 2,     //类型
+            mode : "pop", // 弹出式
+            vOffset: 5,   //误差量，根据需求自行调整
+            vSpace: 5,    //间隔
+            imgName : "",
+            smallImg : "",
+            ticket:"",
+           /* imgSize : {
+                width: slideWidth + "px",
+                height: Math.round(slideWidth/2) + "px",
+            },
+            blockSize : {
+                width: Math.round(slideWidth/2)*0.26+4 + "px",
+                height: Math.round(slideWidth/2) + "px"
+            },
+            barSize : {
+                width: slideWidth + "px",
+                height: slideHeight + "px"
+            },*/
+            imgSize: {
+                width: '338px',
+                height: '191px',
+            },
+            blockSize: {
+                width: '44px',
+                height: '191px',
+            },
+            barSize: {
+                width: '338px',
+                height: '44px',
+            },
+            ready: function () {
+            },
+            success: function (d, callback) {
+
+                //获取票据,拖动的值,图的宽度
+                /*var ticket = d.options.ticket;
+                 var left = d.htmlDoms.left_bar[0].clientWidth;
+                var imageWidth=this.imgSize.width.substring(0,this.imgSize.width.length-2);
+                alert(ticket);
+                alert(left);
+                alert(imageWidth);*/
+
+                // 账号未填写不进行验证
+                /*if(true) {
+                    alert("验证错误");
+                    // 验证错误
+                    //slideTrue = false;
+                    sendTicket = "";
+                    local.slideFail();
+                   callback && callback();
+
+                    return;
+                }else {
+                    alert("验证成功");
+                    // 验证成功
+                    //sendTicket = accessToken;
+                    local.slideSuccess();
+                }*/
+
+                // 获取发送验证码票据
+                remoteDataOperation.getSendTips({
+                    ticket : d.options.ticket,
+                    dragPos : d.htmlDoms.left_bar[0].clientWidth,
+                    imageWidth : this.imgSize.width.substring(0,this.imgSize.width.length-2)
+                }, function(ret) {
+
+                    if(ret && ret.verifyPass && ret.accessToken) {
+                        slideTrue = true;
+                        //slide.options.isShowImg = false;
+
+                        alert("验证成功");
+                        // 验证成功
+                        sendTicket = ret.accessToken;
+                        local.slideSuccess();
+                    }
+
+                    callback && callback();
+
+                }, function(msg) {
+                    alert("验证失败");
+
+                    // 验证错误
+                    slideTrue = false;
+                    sendTicket = "";
+                    local.hideSlideSuccess();
+                    local.slideFail();
+                    callback && callback();
+                });
+
+
+
+
+            },
+            error: function () {
+//               alert('验证失败！');
+            }
+
+        });
+
+
+        //初始化方法
+        _init();
+        //初始化事件
+        _initEvent();
+    }
+}
+
+
+
+/**
+ * 初始化事件
+ */
+var _initEvent =function () {
+    //滑块鼠标事件
+    $(".verify-bar-area").mousemove(function () {
+        //图显示
+        $(".verify-sub-block").css("display","block");
+        $(".verify-img-out").removeClass("ani-hide");
+
+    });
+    $(".verify-bar-area").mouseleave(function () {
+        //图隐藏
+        $(".verify-sub-block").css("display","none");
+        $(".verify-img-out").addClass("ani-hide");
+
+    });
+
+
+
+
+
+    //大图
+    $(".verify-img-out").mousemove(function () {
+        //图显示
+        $(".verify-sub-block").css("display","block");
+        $(".verify-img-out").removeClass("ani-hide");
+    });
+    $(".verify-img-out").mouseleave(function () {
+        //图隐藏
+        $(".verify-sub-block").css("display","none");
+        $(".verify-img-out").addClass("ani-hide");
+    });
+
+    //小图
+    $(".verify-sub-block").mousemove(function () {
+        //图显示
+        $(".verify-sub-block").css("display","block");
+        $(".verify-img-out").removeClass("ani-hide");
+    });
+    $(".verify-sub-block").mouseleave(function () {
+        //图隐藏
+        $(".verify-sub-block").css("display","none");
+        $(".verify-img-out").addClass("ani-hide");
+    });
+
+
+}
+
+/**
+ * 初始化方法，可初始化数据、视图、事件，
+ * 数据、视图、事件三者之间没有绝对的先后顺序，视具体情况而定
+ */
+var _init=function () {
+    //验证码隐藏
+    $(".verify-sub-block").css("display","none");
+    $(".verify-img-out").addClass("ani-hide");
+}
+
+
+$(function(){
+    //初始化验证码
+    local.initSlideVerify();
+
+});
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
